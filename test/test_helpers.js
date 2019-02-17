@@ -289,7 +289,10 @@ describe('helpers.js', function() {
         let armletClient, stubAnalyze, debuggerStub;
 
         beforeEach(() => {
-            armletClient = new armlet.Client({ apiKey: 'test' });
+            armletClient = new armlet.Client({
+		ethAddress: rewiredHelpers.trialEthAddress,
+		password: rewiredHelpers.trialPassword
+	    });
             stubAnalyze = sinon.stub(armletClient, 'analyzeWithStatus');
             debuggerStub = sinon.stub();
         });
