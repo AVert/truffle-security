@@ -1,7 +1,7 @@
 {
   "name": "truffle-security",
   "namespace": "consensys",
-  "version": "1.0.1",
+  "version": "2.0.0-git",
   "description": "MythX security analysis plugin for Truffle Framework",
   "dependencies": {
     "armlet": "git+ssh://git@github.com:consensys/armlet.git",

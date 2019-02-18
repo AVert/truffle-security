@@ -220,6 +220,7 @@ const doAnalysis = async (client, config, jsonFiles, contractNames = null, limit
         let analyzeOpts = {
             timeout,
             clientToolName: 'truffle',
+            debug: config.debug > 2
         };
 
         analyzeOpts.data = cleanAnalyDataEmptyProps(obj.buildObj, config.debug,
@@ -251,8 +252,7 @@ const doAnalysis = async (client, config, jsonFiles, contractNames = null, limit
 
         // request analysis to armlet.
         try {
-	    debugger
-            const {issues, status} = await client.analyzeWithStatus(analyzeOpts);
+            const {elapsed, issues, status} = await client.analyzeWithStatus(analyzeOpts);
             if (config.debug) {
                 config.logger.debug(`UUID for this job is ${status.uuid}`);
                 if (config.debug > 1) {
@@ -280,6 +280,8 @@ const doAnalysis = async (client, config, jsonFiles, contractNames = null, limit
                         'status': '✓ completed'.green
                     });
                 }
+            }
+            if (issues) {
                 obj.setIssues(issues);
             }
             return [null, obj];
